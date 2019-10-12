@@ -92,6 +92,25 @@ For photo's and schematics, see the images folder.
 Thijs Kaper, 12 October 2019.
 
 
+## Software Links:
+
+(1) https://www.arduino.cc/en/Main/software   - Arduino IDE, used both for ESP and ATTiny
+
+(2) In Arduino IDE, board manager URL's for using ESP and ATTiny (in file -> preferences):
+    http://arduino.esp8266.com/stable/package_esp8266com_index.json,http://drazzy.com/package_drazzy.com_index.json
+    Install both ESP8266 and ATTinyCore via Tools -> Board -> Manager.
+
+(3) https://github.com/SpenceKonde/ATTinyCore  - ATTiny Core for Arduino IDE - sources / README's.
+
+(4) https://bitbucket.org/xoseperez/fauxmoesp/src/master/   - The Alexa Connector Library
+
+(5) https://github.com/me-no-dev/ESPAsyncTCP  - needed for fauxmo
+
+(6) ESPAsyncWebServer.zip  - needed for fauxmo
+
+Note: most other needed libraries can be installed from the Arduino IDE using Sketch -> Include Library -> Manage.
+
+
 ## Search terms for used products (on AliExpress, or eBay):
 
 (1) "AC Light lamp dimming LED lamp and motor Dimmer Module, 1 Channel, 3.3V/5V logic, AC 50/60hz, 220V/110V"

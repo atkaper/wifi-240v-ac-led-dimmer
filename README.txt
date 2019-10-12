@@ -106,7 +106,7 @@ Thijs Kaper, 12 October 2019.
 
 (5) https://github.com/me-no-dev/ESPAsyncTCP  - needed for fauxmo
 
-(6) ESPAsyncWebServer.zip  - needed for fauxmo
+(6) https://github.com/me-no-dev/ESPAsyncWebServer  - needed for fauxmo
 
 Note: most other needed libraries can be installed from the Arduino IDE using Sketch -> Include Library -> Manage.
 

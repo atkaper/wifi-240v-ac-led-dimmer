@@ -1,5 +1,7 @@
 # WiFi 240V AC Led Dimmer - Speech Controlled
 
+See also blog post: https://www.kaper.com/electronics/wifi-240v-ac-led-dimmer-speech-controlled/
+
 ## TL;DR
 
 I wanted to build my own WiFi dimmer, to connect to Alexa (Amazon Echo Dot).

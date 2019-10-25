@@ -14,8 +14,21 @@
 //
 // And again, this works fine again. Nice!
 //
-// Thijs Kaper, October 2019.
-
+// Thijs Kaper, 11 October 2019.
+//
+//
+// Addition: We did experience some light (lightning like) flashes when the lights should be off.
+// As an attempt to fix this, three changes: two in code - make sure the triac will never be triggered if
+// brightness is zero. And when chip is reset, set brightness to zero from start. And in hardware: add a
+// pull-up resistor (10K) between pin 1 and 8 to keep reset high, instead of letting the reset pin float free.
+// The floating pin could pick up signals from the air perhaps.
+// 
+// If this does not help, then perhaps there are random signals on the I2C bus? In that case I will try
+// adding a check to the data transfer. For example having to send the brigtness a couple of times, and
+// only if all of them are the same, change the brigtness. And prefix it with some fixed byte value to
+// indicate a brightness will follow. If the prefix is not there, ignore data.
+// 
+// Thijs Kaper, 25 October 2019.
 
 // (Voltage controlled) dimmer with ATtiny45
 //
@@ -49,6 +62,8 @@
 #define GATE 3        //triac gate is physical pin 2
 #define PULSE 2       //trigger pulse width (counts)
 
+int brightness = 0;
+
 void setup(){
   // set up pins
   pinMode(DETECT, INPUT);      //zero cross detect
@@ -56,8 +71,8 @@ void setup(){
   pinMode(GATE, OUTPUT);       //triac gate control
 
   // set up Timer1
-  TCCR1 = 0;     // stop timer
-  OCR1A = 50;    //initialize the comparator
+  TCCR1 = 0;             // stop timer
+  OCR1A = brightness;    // initialize the comparator
   TIMSK = _BV(OCIE1A) | _BV(TOIE1);  //interrupt on Compare Match A | enable timer overflow interrupt
 
   GIMSK = 0b00100000;    // turns on pin change interrupts
@@ -73,11 +88,15 @@ void setup(){
 void receiveI2CEvent(int howMany) {
   // we expect only one byte, but just in case, loop through all to get rid of any buffered data
   while (Wire.available()) {
-    int x = Wire.read();    // receive byte as an integer
+    brightness = Wire.read();    // receive byte as an integer
     
     // translate input range zero to 100 into brightness (phase start delay 65 to 2)
     // And put it in the timer comparator register.
-    OCR1A = map(x, 0, 100, 65, 2);
+    OCR1A = map(brightness, 0, 100, 65, 2);
+
+    if (brightness == 0) {
+      digitalWrite(GATE,LOW);   //turn off triac gate
+    }
   }
 }
 
@@ -91,7 +110,9 @@ ISR(PCINT0_vect) {
 }
 
 ISR(TIMER1_COMPA_vect){    //comparator match
-  digitalWrite(GATE,HIGH); //set triac gate to high
+  if (brightness != 0) {
+    digitalWrite(GATE,HIGH); //set triac gate to high
+  }
   TCNT1 = 255-PULSE;       //trigger pulse width, when TCNT1=255 timer1 overflows
 }
  

@@ -1,3 +1,12 @@
+//
+// STOP! STOP! STOP!
+// Don't use this V4 one, for now stay at V3...
+// Well, of course you are free to try V4, but it does NOT work as good as V3.
+// The V4 shows much more flickering lights than V3. Too bad...
+// Conclusion: I will have to develop a V5 some time, with a phase locked loop.
+// Thijs Kaper, 8 december 2019.
+//
+//
 // (Voltage controlled) dimmer with ATtiny45 (or ATtiny85)
 //
 // This code is inspired by ESP forum article:

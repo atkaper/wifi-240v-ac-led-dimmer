@@ -102,8 +102,8 @@ void receiveI2CEvent(int howMany) {
 
 // Pin change interrupt
 ISR(PCINT0_vect) {
-  // pin change is both rising and falling, so check for LOW as that would be the wanted falling edge interrupt
-  if (digitalRead(DETECT) == LOW) {
+  // pin change is both rising and falling, so check for HIGH as that would be the wanted rising edge interrupt
+  if (digitalRead(DETECT) == HIGH) {
     TCNT1 = 0;   // reset timer - count from zero
     TCCR1 = B00001011;        // prescaler on 1024, see table 12.5 of the tiny85 datasheet
   }

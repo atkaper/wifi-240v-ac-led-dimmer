@@ -5,7 +5,7 @@ See also blog post: https://www.kaper.com/electronics/wifi-240v-ac-led-dimmer-sp
 ## TL;DR
 
 I wanted to build my own WiFi dimmer, to connect to Alexa (Amazon Echo Dot).
-The end-result is a combination of DimmerTest_ESP_V3B with AvrDimmerCoprocessor_V3.
+The end-result is a combination of DimmerTest_ESP_V4 with AvrDimmerCoprocessor_V3.
 The used parts are an ESP8266 (I used a Wemos D1 Mini Clone), an ATTiny45 (or ATTiny85),
 some sort of power module to supply 3.3 volt, and a zero-cross-detector/triac dimmer module.
 
@@ -94,6 +94,18 @@ For photo's and schematics, see the images folder.
 Thijs Kaper, 12 October 2019.
 
 
+## Update - March 2020
+
+My Alexa stopped working with the dimmer. Not sure what caused it, perhaps an update in Alexa code?
+If found a new libray, called Espalexa. It had more recent updates than the FauxmoESP one.
+I installed the library in my Arduine IDE, and generated the EspalexaBasic example. To this example
+I added my I2C code, and OTA update option, and installed it on the ESP. Works fine again now.
+See DimmerTest_ESP_V4 for the end results.
+
+Thijs Kaper, 11 March 2020.
+
+
+
 ## Software Links:
 
 (1) https://www.arduino.cc/en/Main/software   - Arduino IDE, used both for ESP and ATTiny
@@ -104,11 +116,13 @@ Thijs Kaper, 12 October 2019.
 
 (3) https://github.com/SpenceKonde/ATTinyCore  - ATTiny Core for Arduino IDE - sources / README's.
 
-(4) https://bitbucket.org/xoseperez/fauxmoesp/src/master/   - The Alexa Connector Library
+(4) OBSOLETE - use (7): https://bitbucket.org/xoseperez/fauxmoesp/src/master/   - The Alexa Connector Library
 
 (5) https://github.com/me-no-dev/ESPAsyncTCP  - needed for fauxmo
 
 (6) https://github.com/me-no-dev/ESPAsyncWebServer  - needed for fauxmo
+
+(7) https://github.com/Aircoookie/Espalexa - The new library to use together with Alexa
 
 Note: most other needed libraries can be installed from the Arduino IDE using Sketch -> Include Library -> Manage.
 
